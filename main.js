@@ -126,6 +126,36 @@
         const card = pickCard(deck);
         player.cards.push(card);
     }
+
+    const getCardValue = (value, totalScore) => {
+        totalScore = totalScore || false;
+        if (isNaN(value)) {
+            switch (value) {
+                case 'J':    
+                case 'Q':
+                case 'K':
+                    return 10;
+            default:
+                if (totalScore && totalScore == 20) {
+                    return 1;
+                }
+                return 10;
+            }
+        }
+        return +value;
+    }
+
+    const getTotalValue = (playerId) => {
+        const cards = players[playerId].cards;
+        let totalScore = 0;
+
+        for (let cardIndex = 0; cardIndex < cards.length; cardIndex++) {
+            const value = cards[cardIndex].value;
+            const cardScore = getCardValue(value, totalScore);
+            totalScore += +cardScore;
+        }
+        return totalScore;
+    }
     const deck = generateDeck();
     dealCards(deck);
     console.log(players)
