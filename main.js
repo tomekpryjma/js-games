@@ -156,6 +156,13 @@
         }
         return totalScore;
     }
+
+    const cpu = {
+        greeting: () => {
+            console.log("Hello!")
+        }
+    }
+
     const deck = generateDeck();
     dealCards(deck);
     console.log(players)
