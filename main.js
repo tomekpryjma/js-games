@@ -165,5 +165,6 @@
 
     const deck = generateDeck();
     dealCards(deck);
+    addCardToPlayer(1, deck);
     console.log(players)
 }())
