@@ -1,14 +1,10 @@
 (function(){
-    /**
-     * 1) Generate card object.
-     * 2) Generate a deck of cards.
-     */
-
     const maxCards = 52;
     const cardValues = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
     const suits = ['clubs', 'diamonds', 'hearts', 'spades'];
     const players = [];
     var playerCount = 2;
+    var gameOver = false;
 
     /**
      * Populates Deck with cards.
@@ -164,6 +160,7 @@
     }
 
     const deck = generateDeck();
+    generatePlayers();
     dealCards(deck);
     addCardToPlayer(1, deck);
     console.log(players)
