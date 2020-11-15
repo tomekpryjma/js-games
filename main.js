@@ -33,24 +33,54 @@
     }
 
     /**
+     * Generates player objects and appends them to the players array.
+     * 
+     * @return void
+     */
+    const generatePlayers = () => {
+        for (let count = 0; count < playerCount; count++) {
+            const player = {
+                id: count,
+                cpu: count !== 0 ? cpu : null
+            };
+
+            players.push(player)
+        }
+    }
+
+    /**
+     * Retrieves the specified player object.
+     * @param {int} playerId 
+     */
+    const getPlayer = (playerId) => {
+        return players[playerId];
+    }
+
+    /**
+     * Checks whether specified player is human.
+     * @param {object} player 
+     */
+    const playerIsHuman = (player) => {
+        return player.cpu == null;
+    }
+
+    /**
      * Deals cards between the total number of players.
      * @param {object} deck 
+     * @return void
      */
     const dealCards = (deck) => {
         const cardsToDeal = 2;
 
         for (let count = 0; count < playerCount; count++) {
-            const player = {
-                id: count
-            };
             const cards = [];
+            const player = getPlayer(count);
 
             for (let cardNumber = 0; cardNumber < cardsToDeal; cardNumber++) {
                 const card = pickCard(deck);
                 cards.push(card);
             }
             player['cards'] = cards;
-            players.push(player);
         }
     }
 
@@ -91,6 +121,11 @@
         deck[value].splice(cardSuitIndex, 1);
     }
 
+    const addCardToPlayer = (playerId, deck) => {
+        const player = players[playerId];
+        const card = pickCard(deck);
+        player.cards.push(card);
+    }
     const deck = generateDeck();
     dealCards(deck);
     console.log(players)
